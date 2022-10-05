@@ -1,0 +1,172 @@
+﻿
+
+<h2>Cửa sổ cập nhập</h2>
+
+<div id="container">
+    <div>
+        <span>Yêu cầu nhập dữ liệu</span>
+    </div>
+    <form>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Tên chuyên mục:
+                </label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <input type="text" class="inputnoidung" id="TenChuyenMuc" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="ChuyenMucCha">Chuyên mục cha:</label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <select name="ChuyenMucCha" id="ChuyenMucCha">
+                    <option value="None">----------</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Mô tả:
+                </label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <input type="text" class="inputnoidung" id="MoTa">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Thứ tự hiển thị:
+                </label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <input type="text" class="inputnoidung" id="ThuTuHienThi">
+            </div>
+        </div>
+        <div class="button">
+            <input type="button" id="LuuChuyenMuc" onclick="TaoChuyenMuc()" value="Lưu" />
+            <input type="button" id="Huy" onclick="HuyChuyenMuc()" value="Hủy" />
+        </div>
+    </form>
+</div>
+
+<style>
+    #container {
+        border: 1px solid black;
+        margin: 10px;
+    }
+</style>
+<script>
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    var url = window.location.href;
+    var ID = getParameterByName("ID", url);
+    var ListChuyenMuc = [];
+    var ChuyenMuc;
+
+    function LoadChuyenMuc() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetByID?IDChuyenMuc=' + ID,
+            success: function (data) {
+                ChuyenMuc = data;
+                //console.log(ChuyenMuc);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadChuyenMuc();
+    function LoadListChuyenMuc() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetAll',
+            success: function (data) {
+                ListChuyenMuc = data;
+                console.log(ListChuyenMuc);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListChuyenMuc();
+    function LoadDuLieu() {
+        var Ten;
+        if (ChuyenMuc) {
+            document.getElementById("TenChuyenMuc").value = ChuyenMuc.TenChuyenMuc;
+            document.getElementById("MoTa").value = ChuyenMuc.MoTa;
+            document.getElementById("ThuTuHienThi").value = ChuyenMuc.ThuTuHienThi;
+
+            if (ChuyenMuc.IDChuyenMucCha != "00000000-0000-0000-0000-000000000000") {
+                var timkiem = ListChuyenMuc.find(c => c.ID == ChuyenMuc.IDChuyenMucCha);
+                Ten = timkiem.TenChuyenMuc;
+            }
+        }
+        console.log(Ten);
+        if (ListChuyenMuc) {
+            var html = `<option value="None">----------</option>`;
+            ListChuyenMuc.forEach(function (item, index) {
+                if (item.TenChuyenMuc == Ten) {
+                    html += `<option value="${item.TenChuyenMuc}" selected>${item.TenChuyenMuc}</option>`;
+                }
+                else {
+                    html += `<option value="${item.TenChuyenMuc}">${item.TenChuyenMuc}</option>`;
+                }
+            });
+            document.getElementById("ChuyenMucCha").innerHTML = html;
+        }
+    }
+    LoadDuLieu();
+    function TaoChuyenMuc() {
+        var IDChuyenMucCha;
+        var ChuyenMucCha = document.getElementById("ChuyenMucCha").value;
+        if (ChuyenMucCha == "None") {
+            IDChuyenMucCha = null;
+        }
+        else {
+            var timkiem = ListChuyenMuc.find(c => c.TenChuyenMuc == ChuyenMucCha);
+            IDChuyenMucCha = timkiem.ID;
+        }
+        let form = {
+            ID: ChuyenMuc.ID,
+            TenChuyenMuc: document.getElementById("TenChuyenMuc").value,
+            MoTa: document.getElementById("MoTa").value,
+            ThuTuHienThi: document.getElementById("ThuTuHienThi").value,
+            IDChuyenMucCha: IDChuyenMucCha,
+        }
+        console.log(form);
+        $.ajax({
+            type: 'POST',
+            data: form,
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucEdit',
+            success: function (dulieu) {
+                window.location = window.location.origin + "/CMS/Quản-trị-nhóm-bảo-vật";
+            },
+            error: function (err) {
+                alert("Sửa chuyên mục thất bại");
+            }
+        });
+
+    }
+
+    function HuyChuyenMuc() {
+        window.location = window.location.origin + "/CMS/Quản-trị-nhóm-bảo-vật";
+    }
+</script>
+

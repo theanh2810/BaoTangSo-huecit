@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Danh sách nhóm bảo vật</h3>
+<ul id="container">
+</ul>
+
+<div id="Them">
+    <h3>Thêm bảo vật</h3>
+    <div>
+        Nhập tên bảo vật: <input type="text" name="Name" placeholder=""><br>
+    </div>
+</div>
+<div>
+    <input type="button" value="Thêm" onclick="Add()"/>
+    <input type="button" value="Xóa" onclick="Add()" />
+</div>
+
+<script>
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function Add() {
+        window.location = "Quản-trị-nhóm-bảo-vật/Thêm-bảo-vật";
+    }
+    var ListBaoVat = ["Chim","Thú","Bò sát"];
+    function LoadDuLieu() {
+        var html = "";
+        ListBaoVat.forEach(function (item, index) {
+            html += `<li>
+                <input type="checkbox" id="${item}" name="${item}" value="${item}">
+                <label for="${item}">${item}</label>
+            </li>`;
+        });
+        document.getElementById("container").innerHTML = html;
+    }
+    LoadDuLieu();
+</script>

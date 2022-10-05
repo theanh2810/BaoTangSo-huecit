@@ -1,0 +1,16 @@
+﻿<div class="License">
+	<h3>License</h3>
+	<p class="Owner">
+		huecit.vn  <a href=http://www.huecit.vn/>http://www.huecit.vn/</a></br>
+		Bản quyền (c) 2022, HueCIT</br>
+	</p>
+    <p>
+        Không được phép sao chép, thay đổi, phân tán phần mềm này và các tập tin tài liệu liên quan ("Phần mềm") khi không được sự đồng ý trước của HueCIT.
+    </p>
+    <p>
+        Thông báo bản quyền ở trên sẽ được bao gồm trong tất cả các bản sao hoặc phần quan trọng của phần mềm.
+    </p>
+    <p>
+	Phần mềm được cung cấp "nguyên trạng". Người/đơn vị sử dụng phần mềm không thể phàn nàn, yêu cầu bảo hành, khiếu kiện gì một khi đã chấp nhận sử dụng phần mềm này.
+    </p>
+</div>

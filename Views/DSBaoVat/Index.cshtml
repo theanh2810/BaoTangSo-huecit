@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Danh sách chuyên mục</h3>
+<ul id="container">
+</ul>
+
+<div>
+    <input type="button" value="Thêm" onclick="Add()" />
+    <input type="button" value="Xóa" onclick="DeleteChuyenMuc()" />
+</div>
+
+<script>
+    var ListChuyenMuc = [];
+    var ListChuyenMucCha = [];
+    var ListChuyenMucCon = [];
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function Add() {
+        window.location = "Quản-trị-nhóm-bảo-vật/Thêm-nhóm-bảo-vật";
+    }
+
+    function LoadListChuyenMuc() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetAll',
+            success: function (data) {
+                ListChuyenMuc = data;
+                ListChuyenMucCha = [];
+                ListChuyenMucCon = [];
+                if (ListChuyenMuc) {
+                    ListChuyenMuc.forEach(function (item, index) {
+                        if (item.IDChuyenMucCha == "00000000-0000-0000-0000-000000000000") {
+                            ListChuyenMucCha.push(item);
+                        }
+                        else {
+                            ListChuyenMucCon.push(item);
+                        }
+                    });
+                }
+                console.log(ListChuyenMucCha);
+                console.log(ListChuyenMucCon);
+            },
+            error: function (err) {
+               
+            }
+        });
+    }
+    LoadListChuyenMuc();
+
+    function LoadDuLieu() {
+        var html = "";
+        ListChuyenMucCha.forEach(function (item, index) {
+            html += `<li>
+                <input type="checkbox" id="${item.TenChuyenMuc}" name="${item.TenChuyenMuc}" value="${item.TenChuyenMuc}">
+                <a href="${window.location.origin}/CMS/Quản-trị-nhóm-bảo-vật/Sửa-nhóm-bảo-vật?ID=${item.ID}" class=" ">${item.TenChuyenMuc}</a>
+                    <ul id=${item.ID}>
+
+                    </ul>
+            </li>`;
+
+        });
+        document.getElementById("container").innerHTML = html;
+
+
+        ListChuyenMucCha.forEach(function (item, index) {
+            var htmlCon = "";
+            ListChuyenMucCon.forEach(function (itemCon, indexCon) {
+                if (itemCon.IDChuyenMucCha == item.ID) {
+                    htmlCon += `<li>
+                <input type="checkbox" id="${itemCon.TenChuyenMuc}" name="${itemCon.TenChuyenMuc}" value="${itemCon.TenChuyenMuc}">
+                <a href="${window.location.origin}/CMS/Quản-trị-nhóm-bảo-vật/Sửa-nhóm-bảo-vật?ID=${itemCon.ID}" class=" ">${itemCon.TenChuyenMuc}</a>
+            </li>`
+                }
+            });
+            document.getElementById(item.ID).innerHTML = htmlCon;
+
+        });
+
+    }
+    LoadDuLieu();
+
+    
+
+    function DeleteChuyenMuc() {
+        ListChuyenMuc.forEach(function (item, index) {
+            var element = document.getElementById(item.TenChuyenMuc);
+            if (element.checked == true) {
+                $.ajax({
+                    type: 'DELETE',
+                    async: false,
+                    url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucDelete?ID=' + item.ID,
+                    success: function (data) {
+                        LoadListChuyenMuc();
+                        LoadDuLieu();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+        });
+    }
+</script>

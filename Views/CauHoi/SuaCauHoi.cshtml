@@ -1,0 +1,419 @@
+﻿
+
+<div id="wrapper">
+    <div id="container">
+        <table id="tbl-cauhoi"></table>
+        <div class="row mt-3">
+            <div class="col-md-7">
+                <label>Nhóm chuyên mục</label>
+                <select id="ChuyenMuc" name="ChuyenMuc" class="form-control" onchange="ChangeChuyenMuc(this)">
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Mẫu vật</label>
+                <select id="MauVat" name="MauVat" class="form-control">
+                    <option value="">Vui lòng chọn chuyên mục</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-10">
+                <label>Nội dung câu hỏi</label>
+                <textarea rows="3" name="Content" id="Content" class="form-control" placeholder="Nội dung câu hỏi"
+                          maxlength="2000" required></textarea>
+                <small>Tối đa 2000 ký tự. <small class="countLengthDescription"></small></small>
+            </div>
+            <div class="col-md-2">
+                <label>Thứ tự</label>
+                <input type="number" id="Order" name="Order" class="form-control order" value="1" min="1" step="1" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Mô tả</label>
+                <textarea rows="2" name="Note" id="Note" class="form-control" placeholder="Mô tả câu hỏi"
+                          maxlength="500"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="row mt-4">
+        <h6 class="col-md-12">ĐÁP ÁN CÂU HỎI</h6>
+    </div>
+</div>
+
+<div id="NoiDungCauHoi">
+    <div class="row p-1 mt-2">
+        <div class="col-md-9 answer">
+            <textarea rows="2" id="AnswerContent" class="form-control form-control-sm" type="text" placeholder="Nội dung đáp án"></textarea>
+        </div>
+        <div class="col-md-1">
+            <label>Đáp án đúng</label>
+            <input type="checkbox" id="checked" name="checked" value="checked">
+        </div>
+        <div class="col-md-1">
+            <label>Thứ tự</label>
+            <input id="AnswerOrder" class="form-control form-control-sm order" type="number" value="1" min="1">
+        </div>
+        <div class="col-md-1">
+            <a class="" title="Thêm đáp án" id="BtnAddAnswer" onclick="AddAnswer()"><i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4" id="AnswerList">
+    <h6 class="col-md-12">Danh sách đáp án</h6>
+</div>
+<div id="AnswerData">
+</div>
+
+<div class="row text-right m-b-10 mt-2">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary waves-effect waves-light btn-save" id="BtnSave" onclick="LuuCauHoi()">Lưu câu hỏi</button>
+        <a href="/CMS/Quản-trị-câu-hỏi" class="btn btn-secondary waves-effect m-l-5 text-white">Hủy</a>
+    </div>
+</div>
+
+<script>
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    var url = window.location.href;
+    var IDCauHoi = getParameterByName("IDCauHoi", url);
+    var STT = 1;
+    var ListAnswer = [];
+    var ListMauVat = [];
+    var ListChuyenMuc = [];
+    var IDCauHoiMax = 0;
+    var CauHoi;
+    var MauVat;
+    var ChuyenMuc;
+
+    function LoadListDapAn() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/DapAnAPI/DapAnGetByCauHoi?MaCauHoi=' + IDCauHoi,
+            success: function (data) {
+                ListAnswer = data;
+                console.log(ListAnswer);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListDapAn();
+    function LoadListChuyenMuc() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetAll',
+            success: function (data) {
+                ListChuyenMuc = data;
+                //console.log(ListChuyenMuc);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    //LoadListChuyenMuc();
+    function LoadCauHoi(ID) {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/CauHoiAPI/CauHoiGetByID?ID=' + ID,
+            success: function (data) {
+                CauHoi = data;
+                console.log(CauHoi);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadCauHoi(IDCauHoi);
+
+    function LoadMauVat(IDMauVat) {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/MauVatAPI/MauVatGetByID?IDMauVat=' + IDMauVat,
+            success: function (data) {
+                MauVat = data;
+                console.log(MauVat);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadMauVat(CauHoi.MaMauVat);
+    function LoadListMauVat(ID) {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/MauVatAPI/MauVatGetByChuyenMuc?IDChuyenMuc=' + ID,
+            success: function (data) {
+                ListMauVat = data;
+                //console.log(ListMauVat);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+    function LoadChuyenMuc(IDChuyenMuc) {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetByID?IDChuyenMuc=' + IDChuyenMuc,
+            success: function (data) {
+                ChuyenMuc = data;
+                console.log(ChuyenMuc);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadChuyenMuc(MauVat.IDChuyenMuc);
+    function LoadDuLieu() {
+        if (ChuyenMuc) {
+            var html = `<option value="${ChuyenMuc.TenChuyenMuc}">${ChuyenMuc.TenChuyenMuc}</option>`;
+            document.getElementById("ChuyenMuc").innerHTML = html;
+        }
+
+        if (ListAnswer) {
+            ShowDuLieu();
+        }
+
+        if (CauHoi) {
+            document.getElementById("Content").value = CauHoi.NoiDungCauHoi;
+            document.getElementById("Note").value = CauHoi.MoTa;
+            document.getElementById("Order").value = CauHoi.ThuTuHienThi;
+        }
+
+        if (MauVat) {
+            var html = `<option value="${MauVat.TenMauVat}">${MauVat.TenMauVat}</option>`;
+            document.getElementById("MauVat").innerHTML = html;
+        }
+    }
+    LoadDuLieu();
+
+    function ChangeChuyenMuc(obj) {
+        var timkiem = ListChuyenMuc.find(c => c.TenChuyenMuc == obj.value);
+        console.log(timkiem);
+        LoadListMauVat(timkiem.ID);
+        console.log(ListMauVat);
+        if (ListMauVat.length > 0) {
+            var html = `<option value="">Chọn mẫu vật</option>`;
+            ListMauVat.forEach(function (item, index) {
+                html += `
+                    <option value="${item.TenMauVat}">${item.TenMauVat}</option>`
+            });
+            document.getElementById("MauVat").innerHTML = html;
+        }
+        else {
+            var html = `<option value="">Không có mẫu vật</option>`;
+            document.getElementById("MauVat").innerHTML = html;
+        }
+    }
+    function AddAnswer() {
+        if (!document.getElementById("AnswerContent").value) {
+            alert("Vui lòng nhập nội dung đáp án");
+        }
+        else {
+            var noidung = document.getElementById("AnswerContent").value;
+            var thutu = document.getElementById("AnswerOrder").value;
+            var checkbox = document.getElementById("checked");
+            var dapandung = "";
+            if (checkbox.checked) {
+                dapandung = "1";
+            }
+            else {
+                dapandung = "0";
+            }
+            var obj = {
+                ID: null,
+                DapAn: noidung,
+                CauHoiDung: dapandung,
+                ThuTu: thutu,
+                GhiChu: null
+            }
+            thutu = Number(thutu);
+            thutu += 1;
+            ListAnswer.push(obj);
+            ShowDuLieu();
+            
+            document.getElementById("AnswerOrder").value = thutu;
+            document.getElementById("AnswerContent").value = "";
+            document.getElementById("checked").checked = false;
+        }
+    }
+
+    function ShowDuLieu() {
+        var html = "";
+        ListAnswer.forEach(function (item, index) {
+            if (item.CauHoiDung == "1") {
+                html += `<div id="Answer-${index}">
+    <div class="row">
+        <div class="col-md-9 answer">
+            <textarea rows="2" class="form-control form-control-sm text-black answer-content-add" type="text"
+                      id="AnswerContentAdd-${index}">${item.DapAn}</textarea>
+        </div>
+    <div class="col-md-1">
+            <label>Đáp án đúng</label>
+            <input type="checkbox" id="checked-${index}" name="checked-${index}" value="checked-${index}" checked>
+        </div>
+        <div class="col-md-1">
+            <label>Thứ tự</label>
+            <input class="form-control form-control-sm order" type="number" id="AnswerOrderAdd-${index}" value="${index + 1}"
+                   min="1" step="1">
+        </div>
+        <div class="col-md-1">
+            <a class="" title="Xóa đáp án" id="DeleteAnswer-${index}" onclick="DeleteAnswer('${index}')">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+        <div class="divider bg-yellow"></div>
+</div>`;
+            }
+            else {
+                html += `<div id="Answer-${index}">
+    <div class="row">
+        <div class="col-md-9 answer">
+            <textarea rows="2" class="form-control form-control-sm text-black answer-content-add" type="text"
+                      id="AnswerContentAdd-${index}">${item.DapAn}</textarea>
+        </div>
+    <div class="col-md-1">
+            <label>Đáp án đúng</label>
+            <input type="checkbox" id="checked-${index}" name="checked-${index}" value="checked-${index}">
+        </div>
+        <div class="col-md-1">
+            <label>Thứ tự</label>
+            <input class="form-control form-control-sm order" type="number" id="AnswerOrderAdd-${index}" value="${index + 1}"
+                   min="1" step="1">
+        </div>
+        <div class="col-md-1">
+            <a class="" title="Xóa đáp án" id="DeleteAnswer-${index}" onclick="DeleteAnswer('${index}')">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+        <div class="divider bg-yellow"></div>
+</div>`;
+            }
+        });
+        document.getElementById("AnswerData").innerHTML = html;
+    }
+
+    function LuuCauHoi() {
+        var IDMauVat = CauHoi.MaMauVat;
+        if (!IDMauVat) {
+            alert("Vui lòng chọn mẫu vật");
+        }
+        else if (!document.getElementById("Content").value) {
+            alert("Vui lòng nhập nội dung câu hỏi");
+        }
+        else if (ListAnswer.length < 2) {
+            alert("Danh sách đáp án phải có ít nhất 02 đáp án");
+        }
+        else {
+            let form = {
+                ID: IDCauHoi,
+                MaMauVat: IDMauVat,
+                MoTa: document.getElementById("Note").value ? document.getElementById("Note").value : null ,
+                NoiDungCauHoi: document.getElementById("Content").value,
+                ThuTuHienThi: document.getElementById("Order").value,
+            }
+            $.ajax({
+                type: 'POST',
+                async: false,
+                data: form,
+                url: '/api/BaoTangSo/CauHoiAPI/CauHoiEdit',
+                success: function (data) {
+                    ListAnswer.forEach(function (item, index) {
+                        if (!item.ID) {
+                            var formDapAn = {
+                                MaCauHoi: IDCauHoi,
+                                MaMauVat: IDMauVat,
+                                DapAn: item.DapAn,
+                                CauHoiDung: item.CauHoiDung,
+                                GhiChu: null
+                            }
+                            $.ajax({
+                                type: 'POST',
+                                async: false,
+                                data: formDapAn,
+                                url: '/api/BaoTangSo/DapAnAPI/DapAnAdd',
+                                success: function (data) {
+                                    console.log("Thêm đáp án thành công");
+                                },
+                                error: function (err) {
+                                    alert("Thêm đáp án không thành công")
+                                }
+                            });
+                        }
+                        else {
+                            var formDapAn = {
+                                ID: item.ID,
+                                MaCauHoi: IDCauHoi,
+                                MaMauVat: IDMauVat,
+                                DapAn: item.DapAn,
+                                CauHoiDung: item.CauHoiDung,
+                                GhiChu: null
+                            }
+                            $.ajax({
+                                type: 'POST',
+                                async: false,
+                                data: formDapAn,
+                                url: '/api/BaoTangSo/DapAnAPI/DapAnEdit',
+                                success: function (data) {
+                                    console.log("Sửa đáp án thành công");
+                                },
+                                error: function (err) {
+                                    alert("Sửa đáp án không thành công");
+                                }
+                            });
+                        }
+                    });
+                    window.location = window.location.origin + "/CMS/Quản-trị-câu-hỏi";
+                },
+                error: function (err) {
+                    alert("Thêm không thành công");
+                }
+            });
+        }
+    }
+    function LoadMaxIDCauHoi() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/CauHoiAPI/CauHoiGetMaxID',
+            success: function (data) {
+                IDCauHoiMax = data;
+                console.log(IDCauHoiMax);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadMaxIDCauHoi();
+    function DeleteAnswer(index) {
+        ListAnswer.splice(index, 1);
+        ShowDuLieu();
+    }
+</script>

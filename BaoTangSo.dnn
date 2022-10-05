@@ -1,0 +1,703 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="BaoTangSo" type="Module" version="00.00.01">
+      <friendlyName>BaoTangSo</friendlyName>
+      <description>BaoTangSo</description>
+      <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+      <owner>
+        <name>huecit.vn</name>
+        <organization>huecit.vn</organization>
+        <url>http://www.huecit.vn/</url>
+        <email>info@huecit.vn</email>
+      </owner>
+      <license src="License.txt"></license>
+      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+      <dependencies>
+        <dependency type="CoreVersion">08.00.00</dependency>
+      </dependencies>
+      <components>
+		  
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\MVC\BaoTangSo</basePath>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>00.00.01.SqlDataProvider</name>
+              <version>00.00.01</version>
+            </script>
+            <script type="UnInstall">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>00.00.01</version>
+            </script>
+          </scripts>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>BaoTangSo</moduleName>
+            <foldername>BaoTangSo</foldername>
+            <businessControllerClass/>
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>BaoTangSo</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/Item/Index.mvc</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/Item/Edit.mvc</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Content</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                    <supportsPopUps>True</supportsPopUps>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/Settings/Settings.mvc</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>BaoTangSo Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>BaoTangSo.dll</name>
+              <path>bin</path>
+            </assembly>
+          </assemblies>
+        </component>
+      </components>
+    </package>
+	  
+	  <package name="CMS - Quản trị" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Quản trị</friendlyName>
+		  <description>CMS - Quản trị</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Quản trị</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Quản trị</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/Admin/Index.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Danh sách nhóm bảo vật" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Danh sách nhóm bảo vật</friendlyName>
+		  <description>CMS - Danh sách nhóm bảo vật</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Danh sách nhóm bảo vật</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Danh sách nhóm bảo vật</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/DSBaoVat/Index.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Thêm nhóm bảo vật" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Thêm nhóm bảo vật</friendlyName>
+		  <description>CMS - Thêm nhóm bảo vật</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Thêm nhóm bảo vật</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Thêm nhóm bảo vật</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/DSBaoVat/ThemNhomBaoVat.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Sửa nhóm bảo vật" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Sửa nhóm bảo vật</friendlyName>
+		  <description>CMS - Sửa nhóm bảo vật</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Sửa nhóm bảo vật</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Sửa nhóm bảo vật</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/DSBaoVat/SuaNhomBaoVat.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Danh sách bảo vật" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Danh sách bảo vật</friendlyName>
+		  <description>CMS - Danh sách bảo vật</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Danh sách bảo vật</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Danh sách bảo vật</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/BaoVat/Index.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Thêm bảo vật" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Thêm bảo vật</friendlyName>
+		  <description>CMS - Thêm bảo vật</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Thêm bảo vật</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Thêm bảo vật</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/BaoVat/Them.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Sửa mẫu vật" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Sửa mẫu vật</friendlyName>
+		  <description>CMS - Sửa mẫu vật</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Sửa mẫu vật</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Sửa mẫu vật</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/BaoVat/SuaMauVat.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Quản trị câu hỏi" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Quản trị câu hỏi</friendlyName>
+		  <description>CMS - Quản trị câu hỏi</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Quản trị câu hỏi</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Quản trị câu hỏi</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/CauHoi/Index.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Thêm câu hỏi" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Thêm câu hỏi</friendlyName>
+		  <description>CMS - Thêm câu hỏi</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Thêm câu hỏi</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Thêm câu hỏi</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/CauHoi/ThemCauHoi.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <package name="CMS - Sửa câu hỏi" type="Module" version="00.00.01">
+		  <friendlyName>CMS - Sửa câu hỏi</friendlyName>
+		  <description>CMS - Sửa câu hỏi</description>
+		  <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+		  <owner>
+			  <name>Huecit.vn</name>
+			  <organization>Huecit.vn</organization>
+			  <url>https://huecit.vn</url>
+			  <email>info@huecit.vn</email>
+		  </owner>
+		  <license src="License.txt"></license>
+		  <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+		  <dependencies>
+			  <dependency type="CoreVersion">09.02.02</dependency>
+		  </dependencies>
+		  <components>
+			  <component type="ResourceFile">
+				  <resourceFiles>
+					  <basePath>DesktopModules/MVC/BaoTangSo</basePath>
+					  <resourceFile>
+						  <name>Resources.zip</name>
+					  </resourceFile>
+				  </resourceFiles>
+			  </component>
+			  <component type="Module">
+				  <desktopModule>
+					  <moduleName>CMS - Sửa câu hỏi</moduleName>
+					  <foldername>BaoTangSo</foldername>
+
+					  <moduleDefinitions>
+						  <moduleDefinition>
+							  <friendlyName>CMS - Sửa câu hỏi</friendlyName>
+							  <defaultCacheTime>0</defaultCacheTime>
+							  <moduleControls>
+								  <moduleControl>
+									  <controlKey />
+									  <controlSrc>HueCIT.Modules.BaoTangSo.Controllers/CauHoi/SuaCauHoi.mvc</controlSrc>
+									  <supportsPartialRendering>False</supportsPartialRendering>
+									  <controlTitle />
+									  <controlType>View</controlType>
+									  <iconFile />
+									  <helpUrl />
+									  <viewOrder>0</viewOrder>
+								  </moduleControl>
+							  </moduleControls>
+						  </moduleDefinition>
+					  </moduleDefinitions>
+				  </desktopModule>
+			  </component>
+			  <component type="Assembly">
+				  <assemblies>
+					  <assembly>
+						  <name>BaoTangSo.dll</name>
+						  <path>bin</path>
+					  </assembly>
+				  </assemblies>
+			  </component>
+		  </components>
+	  </package>
+
+	  <!--end Quản trị package-->
+  </packages>
+</dotnetnuke>

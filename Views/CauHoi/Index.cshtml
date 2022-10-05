@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="container">
+    <div class="row">
+        <div class="col-md-5">
+            <select id="ChuyenMuc" name="ChuyenMuc" class="form-control" onchange="ChangeChuyenMuc(this)">
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select id="MauVat" name="MauVat" class="form-control">
+                <option value="">Vui lòng chọn chuyên mục</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <input type="button" id="Xem" onclick="XemCauHoi()" value="Xem" />
+        </div>
+        <div class="col-md-3 text-right">
+            <a href="http://baotangso.huecit.com/CMS/Quản-trị-câu-hỏi/Thêm-câu-hỏi" class="btn btn-success waves-effect text-white" title="Tạo mới câu hỏi">
+                <i class="fa fa-plus mr-2"></i>
+                <span>Tạo mới câu hỏi</span>
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <table class="table dataTable table-bordered" id="tbl-cauhoi">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Nội dung</th>
+                    <th>Mô tả</th>
+                    <th>Thứ tự</th>
+                    <th>Sửa</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+            <tbody id="tbl-body">
+                <tr>
+                    <td style="text-align:center;" colspan="6">Không có bản ghi nào</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="NoneList" style="text-align:center; width:100%;"></div>
+    </div>
+</div>
+
+<script>
+    var ListChuyenMuc = [];
+    var ListMauVat = [];
+    var ListCauHoi = [];
+    function LoadListChuyenMuc() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetAll',
+            success: function (data) {
+                ListChuyenMuc = data;
+                console.log(ListChuyenMuc);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListChuyenMuc();
+
+    function LoadListMauVat(ID) {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/MauVatAPI/MauVatGetByChuyenMuc?IDChuyenMuc=' + ID,
+            success: function (data) {
+                ListMauVat = data;
+                //console.log(ListMauVat);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+    function LoadDuLieu() {
+        if (ListChuyenMuc) {
+            var html = `<option value="">Chọn nhóm chuyên mục</option>`;
+            ListChuyenMuc.forEach(function (item, index) {
+                html += `
+                    <option value="${item.TenChuyenMuc}">${item.TenChuyenMuc}</option>`
+            });
+        }
+        document.getElementById("ChuyenMuc").innerHTML = html;
+    }
+    LoadDuLieu();
+
+    function ChangeChuyenMuc(obj) {
+        var timkiem = ListChuyenMuc.find(c => c.TenChuyenMuc == obj.value);
+        console.log(timkiem);
+        LoadListMauVat(timkiem.ID);
+        console.log(ListMauVat);
+        if (ListMauVat.length > 0) {
+            var html = `<option value="">Chọn mẫu vật</option>`;
+            ListMauVat.forEach(function (item, index) {
+                html += `
+                    <option value="${item.TenMauVat}">${item.TenMauVat}</option>`
+            });
+            document.getElementById("MauVat").innerHTML = html;
+        }
+        else {
+            var html = `<option value="">Không có mẫu vật</option>`;
+            document.getElementById("MauVat").innerHTML = html;
+        }
+    }
+
+    function XemCauHoi() {
+        var TenMauVat = document.getElementById("MauVat").value;
+        if (TenMauVat) {
+            var timkiem = ListMauVat.find(c => c.TenMauVat == TenMauVat);
+            LoadListCauHoi(timkiem.IDMauVat);
+            if (ListCauHoi.length > 0) {
+                var html = "";
+                console.log(ListCauHoi);
+                ListCauHoi.forEach(function (item, index) {
+                    html += `<tr>
+            <td>${index + 1}</td>
+            <td>${item.NoiDungCauHoi}</td>
+            <td>${item.MoTa}</td>
+            <td>${item.ThuTuHienThi}</td>
+            <td><input onclick="UpdateCauHoi(${index})" type="button" value="Sửa" /></td>
+            <td><input id="delete-${index}" onclick="DeleteCauHoi(${index})" type="button" value="Xóa" /></td>
+        </tr>`;
+                });
+                document.getElementById("tbl-body").innerHTML = html;
+            }
+            else {
+                var html = `<tr>
+                    <td style="text-align:center;" colspan="6">Không có bản ghi nào</td>
+                </tr>`;
+                document.getElementById("tbl-body").innerHTML = html;
+            }
+        }
+        else {
+            alert("Vui lòng chọn mẫu vật");
+        }
+    }
+    function LoadListCauHoi(ID) {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/CauHoiAPI/CauHoiGetByMauVat?IDMauVat=' + ID,
+            success: function (data) {
+                ListCauHoi = data;
+                console.log(ListCauHoi);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+    function DeleteCauHoi(index) {
+        console.log(ListCauHoi[index]);
+    }
+
+    function UpdateCauHoi(index) {
+        //console.log(ListCauHoi[index]);
+        window.location = window.location.origin + "/CMS/Quản-trị-câu-hỏi/Sửa-câu-hỏi?IDCauHoi=" + ListCauHoi[index].ID;
+    }
+</script>
+

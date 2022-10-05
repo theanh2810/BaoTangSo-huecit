@@ -1,0 +1,123 @@
+﻿
+
+<h2>Cửa sổ cập nhập</h2>
+
+<div id="container">
+    <div>
+        <span>Yêu cầu nhập dữ liệu</span>
+    </div>
+    <form>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Tên chuyên mục:
+                </label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <input type="text" class="inputnoidung" id="TenChuyenMuc" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="ChuyenMucCha">Chuyên mục cha:</label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <select name="ChuyenMucCha" id="ChuyenMucCha">
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Mô tả:
+                </label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <input type="text" class="inputnoidung" id="MoTa">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Thứ tự hiển thị:
+                </label>
+            </div>
+            <div class="col-md-7 mid-pane">
+                <input type="text" class="inputnoidung" id="ThuTuHienThi">
+            </div>
+        </div>
+        <div class="button">
+            <input type="button" id="LuuChuyenMuc" onclick="TaoChuyenMuc()" value="Lưu" />
+            <input type="button" id="Huy" onclick="HuyChuyenMuc()" value="Hủy" />
+        </div>
+    </form>
+</div>
+
+<style>
+    #container {
+        border: 1px solid black;
+        margin: 10px;
+    }
+</style>
+<script>
+    var ListChuyenMuc = [];
+    function LoadListChuyenMuc() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetAll',
+            success: function (data) {
+                ListChuyenMuc = data;
+                console.log(ListChuyenMuc);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListChuyenMuc();
+    function LoadDuLieu() {
+        var html = `<option value="None">----------</option>`;
+        ListChuyenMuc.forEach(function (item, index) {
+            html += `<option value="${item.TenChuyenMuc}">${item.TenChuyenMuc}</option>`;
+        });
+        document.getElementById("ChuyenMucCha").innerHTML = html;
+    }
+    LoadDuLieu();
+    function TaoChuyenMuc() {
+        var IDChuyenMucCha;
+        var ChuyenMucCha = document.getElementById("ChuyenMucCha").value;
+        if (ChuyenMucCha == "None") {
+            IDChuyenMucCha = null;
+        }
+        else {
+            var timkiem = ListChuyenMuc.find(c => c.TenChuyenMuc == ChuyenMucCha);
+            IDChuyenMucCha = timkiem.ID;
+        }
+        let form = {
+            TenChuyenMuc: document.getElementById("TenChuyenMuc").value,
+            MoTa: document.getElementById("MoTa").value,
+            ThuTuHienThi: document.getElementById("ThuTuHienThi").value,
+            IDChuyenMucCha: IDChuyenMucCha,
+        }
+        console.log(form);
+        $.ajax({
+            type: 'POST',
+            data: form,
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucAdd',
+            success: function (dulieu) {
+                window.location = window.location.origin + "/CMS/Quản-trị-nhóm-bảo-vật";
+            },
+            error: function (err) {
+                alert("Thêm chuyên mục thất bại");
+            }
+        });
+        
+    }
+
+    function HuyChuyenMuc() {
+        window.location = window.location.origin + "/CMS/Quản-trị-nhóm-bảo-vật";
+    }
+</script>
+

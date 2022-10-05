@@ -1,0 +1,188 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+<div id="funcList">
+    <a href="http://baotangso.huecit.com/CMS/Quản-trị-bảo-vật">Danh sách</a>
+    <a href="http://baotangso.huecit.com/CMS/Quản-trị-bảo-vật/Thêm-bảo-vật">Thêm mới</a>
+</div>
+<div id="container">
+    <h3>Lọc, tìm mẫu vật</h3>
+    <form>
+        <label for="cars">Chọn chuyên mục:</label>
+        <select name="ChuyenMuc" id="ChuyenMuc">
+        </select>
+        <br><br>
+        <input type="button" onclick="XemMauVat()" value="Xem">
+        <input type="button" value="Hủy">
+    </form>
+</div>
+<table id="table1">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Họ</th>
+            <th>Phân loại</th>
+            <th>Sửa</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody id="tbl-body">
+    </tbody>
+</table>
+<div class="container-modal-ask"></div>
+<style>
+    #container{
+        margin-bottom: 10px;
+    }
+    #funcList{
+        width: 100%;
+        border: solid 2px black;
+        padding: 10px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+    }
+    #funcList a {
+        margin-right:10px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        //$('#table1').DataTable();
+        $('#table1').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/vi.json'
+            }
+        });
+    });
+
+    var ListMauVat = [];
+    function LoadListMauVat() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/MauVatAPI/MauVatGetAll',
+            success: function (data) {
+                ListMauVat = data;
+                console.log(ListMauVat);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListMauVat();
+    var ListChuyenMuc = [];
+    function LoadListChuyenMuc() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetAll',
+            success: function (data) {
+                ListChuyenMuc = data;
+                //console.log(ListChuyenMuc);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListChuyenMuc();
+
+    function LoadDuLieu() {
+        var html = "";
+        ListMauVat.forEach(function (item, index) {
+            var timkiem = ListChuyenMuc.find(c => c.ID == item.IDChuyenMuc);
+            //console.log(timkiem);
+            html += `<tr>
+            <td>${index + 1}</td>
+            <td>${item.TenMauVat}</td>
+            <td>${item.Ho}</td>
+            <td>${timkiem.TenChuyenMuc}</td>
+            <td><input type="button" value="Sửa" onclick="UpdateMauVat('${item.IDMauVat}')" /></td>
+            <td><input id="delete-${index}" onclick="DeleteMauVat('${item.IDMauVat}')" type="button" value="Xóa" /></td>
+        </tr>`;
+        });
+        document.getElementById("tbl-body").innerHTML = html;
+    }
+    LoadDuLieu();
+
+    function LoadNoiDungChuyenMuc() {
+        var html = `<option value="All">Tất cả</option>`;
+        ListChuyenMuc.forEach(function (item, index) {
+            html += `<option value="${item.TenChuyenMuc}">${item.TenChuyenMuc}</option>`;
+        });
+        document.getElementById("ChuyenMuc").innerHTML = html;
+    }
+    LoadNoiDungChuyenMuc();
+    function XemMauVat() {
+        var TenChuyenMuc = document.getElementById("ChuyenMuc").value;
+        console.log(TenChuyenMuc);
+        if (TenChuyenMuc == "All") {
+            LoadListMauVat();
+            LoadDuLieu();
+        }
+        else {
+            var ChuyenMuc = ListChuyenMuc.find(c => c.TenChuyenMuc == TenChuyenMuc);
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: '/api/BaoTangSo/MauVatAPI/MauVatGetByChuyenMuc?IDChuyenMuc=' + ChuyenMuc.ID,
+                success: function (data) {
+                    ListMauVat = data;
+                    LoadDuLieu();
+                },
+                error: function (err) {
+
+                }
+            });
+        }
+    }
+    function DeleteMauVat(ID) {   
+                var html = `
+            <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-delete">
+                    <div class="confirm-delete-ico"></div>
+                    <p class="confirm-delete-top">Bạn có chắc chắn muốn xóa?</p>
+                    </div>
+                    <div class="modal-footer modal-footer-delete">
+                    <button type="button"  onclick="DeleteHandle('${ID}')" class="btn btn-primary" data-bs-dismiss="modal">Đồng ý</button>
+                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+                    `;
+                document.querySelector(".container-modal-ask").innerHTML = html;
+                $("#delete-modal").modal('show');
+   
+    }
+    function DeleteHandle(ID) {
+        $.ajax({
+            type: 'DELETE',
+            async: false,
+            url: '/api/BaoTangSo/MauVatAPI/MauVatDelete?ID=' + ID,
+            success: function (data) {
+                LoadListMauVat();
+                LoadDuLieu();
+            },
+            error: function (err) {
+                alert("Xóa không thành công!");
+            }
+        });
+
+    }
+    function UpdateMauVat(ID) {
+        window.location = window.location.origin + "/CMS/Quản-trị-bảo-vật/Sửa-bảo-vật?ID=" +ID;
+    }
+
+</script>
+
