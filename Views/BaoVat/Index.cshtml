@@ -5,11 +5,11 @@
 @{
     ViewBag.Title = "Index";
 }
-<div id="funcList">
+<div id="funcList" style="margin-bottom: 20px;">
     <a href="http://baotangso.huecit.com/CMS/Quản-trị-bảo-vật">Danh sách</a>
     <a href="http://baotangso.huecit.com/CMS/Quản-trị-bảo-vật/Thêm-bảo-vật">Thêm mới</a>
 </div>
-<div id="container">
+@*<div id="container">
     <h3>Lọc, tìm mẫu vật</h3>
     <form>
         <label for="cars">Chọn chuyên mục:</label>
@@ -17,9 +17,9 @@
         </select>
         <br><br>
         <input type="button" onclick="XemMauVat()" value="Xem">
-        <input type="button" value="Hủy">
+        <input type="button" onclick="Huy()" value="Hủy">
     </form>
-</div>
+</div>*@
 <table id="table1">
     <thead>
         <tr>
@@ -56,6 +56,7 @@
     $(document).ready(function () {
         //$('#table1').DataTable();
         $('#table1').DataTable({
+            "aaSorting": [],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/vi.json'
             }
@@ -113,14 +114,14 @@
     }
     LoadDuLieu();
 
-    function LoadNoiDungChuyenMuc() {
+    @*function LoadNoiDungChuyenMuc() {
         var html = `<option value="All">Tất cả</option>`;
         ListChuyenMuc.forEach(function (item, index) {
             html += `<option value="${item.TenChuyenMuc}">${item.TenChuyenMuc}</option>`;
         });
         document.getElementById("ChuyenMuc").innerHTML = html;
     }
-    LoadNoiDungChuyenMuc();
+    LoadNoiDungChuyenMuc();*@
     function XemMauVat() {
         var TenChuyenMuc = document.getElementById("ChuyenMuc").value;
         console.log(TenChuyenMuc);
@@ -173,15 +174,21 @@
             success: function (data) {
                 LoadListMauVat();
                 LoadDuLieu();
+                alertify.success("Xóa mẫu vật thành công!");
             },
             error: function (err) {
-                alert("Xóa không thành công!");
+                alertify.error("Xóa mẫu vật không thành công!");
             }
         });
 
     }
     function UpdateMauVat(ID) {
         window.location = window.location.origin + "/CMS/Quản-trị-bảo-vật/Sửa-bảo-vật?ID=" +ID;
+    }
+
+    function Huy() {
+        LoadListMauVat();
+        LoadDuLieu();
     }
 
 </script>

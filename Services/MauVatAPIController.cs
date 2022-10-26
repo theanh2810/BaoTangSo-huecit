@@ -153,21 +153,20 @@ namespace HueCIT.Modules.BaoTangSo.Services
 
 
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage FileUpload()
+        public HttpResponseMessage FileUpload(string TenMauVat)
         {
             try
             {
                 var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
-                string web_dir = "Portals\\images\\";
+                string web_dir = "Portals\\0\\BaoTangSo\\images\\";
                 var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
                 dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
-                //dir = "D:\\BaoTangSo\\Portals\\images";
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
                 file.SaveAs(dir + file.FileName);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file thành công", "application/json");
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
             }
             catch (Exception ex)
             {
@@ -177,21 +176,20 @@ namespace HueCIT.Modules.BaoTangSo.Services
         }
 
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage FileUploadVideo()
+        public HttpResponseMessage FileUploadAnhTaiVe(string TenMauVat)
         {
             try
             {
                 var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
-                string web_dir = "Portals\\videos\\";
+                string web_dir = "Portals\\0\\BaoTangSo\\images\\";
                 var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
                 dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
-                //dir = "D:\\BaoTangSo\\Portals\\images";
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
                 file.SaveAs(dir + file.FileName);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file thành công", "application/json");
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
             }
             catch (Exception ex)
             {
@@ -201,12 +199,12 @@ namespace HueCIT.Modules.BaoTangSo.Services
         }
 
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage FileUploadThuyetMinh()
+        public HttpResponseMessage FileUploadAnhTieuBan(string TenMauVat)
         {
             try
             {
                 var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
-                string web_dir = "Portals\\FileThuyetMinh\\";
+                string web_dir = "Portals\\0\\BaoTangSo\\images\\";
                 var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
                 dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
                 //dir = "D:\\BaoTangSo\\Portals\\images";
@@ -215,7 +213,7 @@ namespace HueCIT.Modules.BaoTangSo.Services
                     Directory.CreateDirectory(dir);
                 }
                 file.SaveAs(dir + file.FileName);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file thành công", "application/json");
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
             }
             catch (Exception ex)
             {
@@ -225,23 +223,68 @@ namespace HueCIT.Modules.BaoTangSo.Services
         }
 
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage FileUploadSach()
+        public HttpResponseMessage FileUploadVideo(string TenMauVat)
+        {
+            try
+            {
+                var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
+                string web_dir = "Portals\\0\\BaoTangSo\\videos\\";
+                var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
+                dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                file.SaveAs(dir + file.FileName);
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file lỗi:" + ex.Message, "application/json");
+            }
+
+        }
+
+        [System.Web.Http.HttpPost]
+        public HttpResponseMessage FileUploadThuyetMinh(string TenMauVat)
+        {
+            try
+            {
+                var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
+                string web_dir = "Portals\\0\\BaoTangSo\\audios\\";
+                var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
+                dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                file.SaveAs(dir + file.FileName);
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file lỗi:" + ex.Message, "application/json");
+            }
+
+        }
+
+        [System.Web.Http.HttpPost]
+        public HttpResponseMessage FileUploadSach(string TenMauVat)
         {
             try
             {
                 var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
                 var fileAvatar = HttpContext.Current.Request.Files.Count > 1 ? HttpContext.Current.Request.Files[1] : null;
-                string web_dir = "Portals\\Sach\\";
+                string web_dir = "Portals\\0\\BaoTangSo\\files\\";
                 var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
                 dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
-                //dir = "D:\\BaoTangSo\\Portals\\images";
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
                 file.SaveAs(dir + file.FileName);
                 fileAvatar.SaveAs(dir + fileAvatar.FileName);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file thành công", "application/json");
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
             }
             catch (Exception ex)
             {
@@ -251,21 +294,20 @@ namespace HueCIT.Modules.BaoTangSo.Services
         }
 
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage FileUploadBaiNghienCuu()
+        public HttpResponseMessage FileUploadBaiNghienCuu(string TenMauVat)
         {
             try
             {
                 var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
-                string web_dir = "Portals\\BaiNghienCuu\\";
+                string web_dir = "Portals\\0\\BaoTangSo\\files\\";
                 var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
                 dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
-                //dir = "D:\\BaoTangSo\\Portals\\BaiNghienCuu";
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
                 file.SaveAs(dir + file.FileName);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file thành công", "application/json");
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
             }
             catch (Exception ex)
             {
@@ -275,25 +317,49 @@ namespace HueCIT.Modules.BaoTangSo.Services
         }
 
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage FileUploadTaiLieu()
+        public HttpResponseMessage FileUploadTaiLieu(string TenMauVat)
         {
             try
             {
                 var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
-                string web_dir = "Portals\\TaiLieu\\";
+                string web_dir = "Portals\\0\\BaoTangSo\\files\\";
+                var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
+                dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                file.SaveAs(dir + file.FileName);
+                return Request.CreateResponse(HttpStatusCode.OK, "Thêm file thành công", "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file lỗi:" + ex.Message, "application/json");
+            }
+
+        }
+
+        [System.Web.Http.HttpDelete]
+        public HttpResponseMessage DeleteFile(string TenMauVat, string TenFile, int LoaiFile)
+        {
+            try
+            {
+                string thumuc = "";
+                //nếu là file hình ảnh tiêu bản
+                if(LoaiFile == 1)
+                {
+                    thumuc = "HinhAnhTieuBan";
+                }
+                string web_dir = "Portals\\0\\" + TenMauVat + "\\" + thumuc +"\\";
                 var dir = HttpContext.Current.Server.MapPath(web_dir); // đường dẫn lưu ảnh
                 dir = dir.Replace("api\\BaoTangSo\\MauVatAPI\\", "");
                 //dir = "D:\\BaoTangSo\\Portals\\TaiLieu";
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-                file.SaveAs(dir + file.FileName);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file thành công", "application/json");
+                System.IO.File.Delete(dir + TenFile);
+                return Request.CreateResponse(HttpStatusCode.OK, "Xóa ảnh thành công", "application/json");
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Thêm file lỗi:" + ex.Message, "application/json");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Xóa ảnh lỗi:" + ex.Message, "application/json");
             }
 
         }

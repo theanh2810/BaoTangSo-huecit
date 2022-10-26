@@ -146,7 +146,6 @@
     <Compile Include="Services\CauHoiAPIController.cs" />
     <Compile Include="Services\MauVatAPIController.cs" />
     <Compile Include="Services\ChuyenMucAPIController.cs" />
-    <Compile Include="Services\TestAPIController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Documentation.css" />

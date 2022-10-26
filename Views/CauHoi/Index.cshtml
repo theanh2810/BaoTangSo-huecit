@@ -5,10 +5,10 @@
 
 <div id="container">
     <div class="row">
-        <div class="col-md-5">
-            <select id="ChuyenMuc" name="ChuyenMuc" class="form-control" onchange="ChangeChuyenMuc(this)">
-            </select>
-        </div>
+        <!--<div class="col-md-5">-->
+            @*<select id="ChuyenMuc" name="ChuyenMuc" class="form-control" onchange="ChangeChuyenMuc(this)">
+            </select>*@
+        <!--</div>-->
         <div class="col-md-3">
             <select id="MauVat" name="MauVat" class="form-control">
                 <option value="">Vui lòng chọn chuyên mục</option>
@@ -25,10 +25,11 @@
         </div>
     </div>
     <div class="row mt-4">
-        <table class="table dataTable table-bordered" id="tbl-cauhoi">
+        @*<table class="table dataTable table-bordered" id="tbl-cauhoi">
             <thead>
                 <tr>
                     <th>STT</th>
+                    <th>Tên mẫu vật</th>
                     <th>Nội dung</th>
                     <th>Mô tả</th>
                     <th>Thứ tự</th>
@@ -41,16 +42,45 @@
                     <td style="text-align:center;" colspan="6">Không có bản ghi nào</td>
                 </tr>
             </tbody>
-        </table>
+        </table>*@
+
+        
+
         <div id="NoneList" style="text-align:center; width:100%;"></div>
     </div>
 </div>
-
+<table id="tbl-cauhoi">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên mẫu vật</th>
+            <th>Nội dung</th>
+            <th>Mô tả</th>
+            <th>Thứ tự</th>
+            <th>Sửa</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody id="tbl-body">
+    </tbody>
+</table>
+<div class="container-modal-ask"></div>
 <script>
+    $(document).ready(function () {
+        //$('#table1').DataTable();
+        $('#tbl-cauhoi').DataTable({
+            @*order: [[0, 'asc']],*@
+            "aaSorting": [],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/vi.json'
+            }
+        });
+    });
     var ListChuyenMuc = [];
+    var ListMauVatAll = [];
     var ListMauVat = [];
     var ListCauHoi = [];
-    function LoadListChuyenMuc() {
+    @*function LoadListChuyenMuc() {
         $.ajax({
             type: 'GET',
             async: false,
@@ -64,7 +94,7 @@
             }
         });
     }
-    LoadListChuyenMuc();
+    LoadListChuyenMuc();*@
 
     function LoadListMauVat(ID) {
         $.ajax({
@@ -81,7 +111,79 @@
         });
     }
 
-    function LoadDuLieu() {
+    function LoadListMauVatAll() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/MauVatAPI/MauVatGetAll',
+            success: function (data) {
+                ListMauVatAll = data;
+                console.log(ListMauVatAll);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListMauVatAll();
+
+    function ShowDuLieuMauVat() {
+        if (ListMauVatAll.length > 0) {
+            var html = `<option value="">Chọn mẫu vật</option>`;
+            ListMauVatAll.forEach(function (item, index) {
+                html += `
+                    <option value="${item.TenMauVat}">${item.TenMauVat}</option>`
+            });
+            document.getElementById("MauVat").innerHTML = html;
+        }
+        else {
+            var html = `<option value="">Không có mẫu vật</option>`;
+            document.getElementById("MauVat").innerHTML = html;
+        }
+    }
+    ShowDuLieuMauVat();
+    function LoadListCauHoiAll() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: '/api/BaoTangSo/CauHoiAPI/CauHoiGetAll',
+            success: function (data) {
+                ListCauHoi = data;
+                //console.log(ListCauHoi);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    LoadListCauHoiAll();
+
+    function ShowDuLieuAll() {
+        if (ListCauHoi.length > 0) {
+            var html = "";
+            ListCauHoi.forEach(function (item, index) {
+                var mauvat = ListMauVatAll.find(c => c.IDMauVat == item.MaMauVat);
+                html += `<tr>
+            <td>${index + 1}</td>
+            <td>${mauvat.TenMauVat}</td>
+            <td>${item.NoiDungCauHoi}</td>
+            <td>${item.MoTa}</td>
+            <td>${item.ThuTuHienThi}</td>
+            <td><input onclick="UpdateCauHoi(${index})" type="button" value="Sửa" /></td>
+            <td><input id="delete-${index}" onclick="DeleteCauHoi(${index})" type="button" value="Xóa" /></td>
+        </tr>`;
+            });
+            document.getElementById("tbl-body").innerHTML = html;
+        }
+        else {
+            var html = `<tr>
+                    <td style="text-align:center;" colspan="6">Không có bản ghi nào</td>
+                </tr>`;
+            document.getElementById("tbl-body").innerHTML = html;
+        }
+    }
+    ShowDuLieuAll();
+    @*function LoadDuLieu() {
         if (ListChuyenMuc) {
             var html = `<option value="">Chọn nhóm chuyên mục</option>`;
             ListChuyenMuc.forEach(function (item, index) {
@@ -90,8 +192,8 @@
             });
         }
         document.getElementById("ChuyenMuc").innerHTML = html;
-    }
-    LoadDuLieu();
+    }*@
+    //LoadDuLieu();
 
     function ChangeChuyenMuc(obj) {
         var timkiem = ListChuyenMuc.find(c => c.TenChuyenMuc == obj.value);
@@ -115,14 +217,15 @@
     function XemCauHoi() {
         var TenMauVat = document.getElementById("MauVat").value;
         if (TenMauVat) {
-            var timkiem = ListMauVat.find(c => c.TenMauVat == TenMauVat);
+            var timkiem = ListMauVatAll.find(c => c.TenMauVat == TenMauVat);
             LoadListCauHoi(timkiem.IDMauVat);
             if (ListCauHoi.length > 0) {
                 var html = "";
-                console.log(ListCauHoi);
                 ListCauHoi.forEach(function (item, index) {
+                    var mauvat = ListMauVatAll.find(c => c.IDMauVat == item.MaMauVat);
                     html += `<tr>
             <td>${index + 1}</td>
+            <td>${mauvat.TenMauVat}</td>
             <td>${item.NoiDungCauHoi}</td>
             <td>${item.MoTa}</td>
             <td>${item.ThuTuHienThi}</td>
@@ -159,7 +262,39 @@
     }
 
     function DeleteCauHoi(index) {
-        console.log(ListCauHoi[index]);
+        var html = `
+            <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-delete">
+                    <div class="confirm-delete-ico"></div>
+                    <p class="confirm-delete-top">Bạn có chắc chắn muốn xóa?</p>
+                    </div>
+                    <div class="modal-footer modal-footer-delete">
+                    <button type="button"  onclick="DeleteHandleCauHoi('${index}')" class="btn btn-primary" data-bs-dismiss="modal">Đồng ý</button>
+                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+                    `;
+        document.querySelector(".container-modal-ask").innerHTML = html;
+        $("#delete-modal").modal('show');
+    }
+    function DeleteHandleCauHoi(index) {
+        $.ajax({
+            type: 'DELETE',
+            async: false,
+            url: `/api/BaoTangSo/CauHoiAPI/CauHoiDelete?ID=${ListCauHoi[index].ID}`,
+            success: function (dulieu) {
+                LoadListCauHoiAll();
+                ShowDuLieuAll();
+                alertify.success("Xóa dữ liệu thành công");
+            },
+            error: function (err) {
+                alertify.error("Xóa dữ liệu thất bại");
+            }
+        });
     }
 
     function UpdateCauHoi(index) {

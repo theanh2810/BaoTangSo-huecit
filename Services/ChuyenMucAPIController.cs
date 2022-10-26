@@ -54,6 +54,21 @@ namespace HueCIT.Modules.BaoTangSo.Services
         }
 
         [System.Web.Http.HttpGet]
+        public HttpResponseMessage ChuyenMucChaGetAll()
+        {
+            try
+            {
+                List<ChuyenMuc> List = ChuyenMucDAL.ChuyenMucChaGetAll();
+                return Request.CreateResponse(HttpStatusCode.OK, List, "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Lỗi :" + ex.Message, "application/json");
+            }
+
+        }
+
+        [System.Web.Http.HttpGet]
         public HttpResponseMessage ChuyenMucGetByID(string IDChuyenMuc)
         {
             try

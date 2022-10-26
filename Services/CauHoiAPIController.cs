@@ -39,6 +39,21 @@ namespace HueCIT.Modules.BaoTangSo.Services
         }
 
         [System.Web.Http.HttpGet]
+        public HttpResponseMessage CauHoiGetAll()
+        {
+            try
+            {
+                List<CauHoi> list = CauHoiDAL.CauHoiGetAll();
+                return Request.CreateResponse(HttpStatusCode.OK, list, "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Lỗi :" + ex.Message, "application/json");
+            }
+
+        }
+
+        [System.Web.Http.HttpGet]
         public HttpResponseMessage CauHoiGetMaxID()
         {
             try
@@ -99,6 +114,26 @@ namespace HueCIT.Modules.BaoTangSo.Services
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Sửa câu hỏi lỗi:" + ex.Message, "application/json");
+            }
+
+        }
+
+        [System.Web.Http.HttpDelete]
+        public HttpResponseMessage CauHoiDelete(int ID)
+        {
+            try
+            {
+                bool check = CauHoiDAL.CauHoiDelete(ID);
+                if (check == true)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "Xóa câu hỏi thành công!", "application/json");
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Xóa câu hỏi lỗi!", "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Xóa câu hỏi lỗi:" + ex.Message, "application/json");
             }
 
         }

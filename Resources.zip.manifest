@@ -1301,12 +1301,12 @@
       <name>_translationstatus.txt</name>
     </file>
     <file>
-      <path>Views/Shared/</path>
-      <name>_Layout.cshtml</name>
-    </file>
-    <file>
       <path>lib/ckeditor/ckeditor/plugins/a11yhelp/dialogs/</path>
       <name>a11yhelp.js</name>
+    </file>
+    <file>
+      <path>Views/Shared/</path>
+      <name>_Layout.cshtml</name>
     </file>
     <file>
       <path>Views/Settings/</path>
@@ -1321,6 +1321,14 @@
       <name>Index.cshtml</name>
     </file>
     <file>
+      <path>lib/ckeditor/ckeditor/lang/</path>
+      <name>en.js</name>
+    </file>
+    <file>
+      <path>lib/ckeditor/ckeditor/lang/</path>
+      <name>vi.js</name>
+    </file>
+    <file>
       <path>Views/DSBaoVat/</path>
       <name>Index.cshtml</name>
     </file>
@@ -1333,12 +1341,8 @@
       <name>ThemNhomBaoVat.cshtml</name>
     </file>
     <file>
-      <path>lib/ckeditor/ckeditor/lang/</path>
-      <name>en.js</name>
-    </file>
-    <file>
-      <path>lib/ckeditor/ckeditor/lang/</path>
-      <name>vi.js</name>
+      <path>lib/ckeditor/ckeditor/adapters/</path>
+      <name>jquery.js</name>
     </file>
     <file>
       <path>Views/CauHoi/</path>
@@ -1351,22 +1355,6 @@
     <file>
       <path>Views/CauHoi/</path>
       <name>ThemCauHoi.cshtml</name>
-    </file>
-    <file>
-      <path>lib/ckeditor/ckeditor/adapters/</path>
-      <name>jquery.js</name>
-    </file>
-    <file>
-      <path>Views/BaoVat/</path>
-      <name>Index.cshtml</name>
-    </file>
-    <file>
-      <path>Views/BaoVat/</path>
-      <name>SuaMauVat.cshtml</name>
-    </file>
-    <file>
-      <path>Views/BaoVat/</path>
-      <name>Them.cshtml</name>
     </file>
     <file>
       <path>lib/ckeditor/ckeditor/</path>
@@ -1389,8 +1377,92 @@
       <name>styles.js</name>
     </file>
     <file>
+      <path>Views/BaoVat/</path>
+      <name>Index.cshtml</name>
+    </file>
+    <file>
+      <path>Views/BaoVat/</path>
+      <name>SuaMauVat.cshtml</name>
+    </file>
+    <file>
+      <path>Views/BaoVat/</path>
+      <name>Them.cshtml</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>bootstrap.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>bootstrap.min.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>bootstrap.rtl.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>bootstrap.rtl.min.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>default.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>default.min.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>default.rtl.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>default.rtl.min.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>semantic.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>semantic.min.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>semantic.rtl.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/themes/</path>
+      <name>semantic.rtl.min.css</name>
+    </file>
+    <file>
       <path>Views/Admin/</path>
       <name>Index.cshtml</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/</path>
+      <name>alertify.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/</path>
+      <name>alertify.min.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/</path>
+      <name>alertify.rtl.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/css/</path>
+      <name>alertify.rtl.min.css</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/</path>
+      <name>alertify.js</name>
+    </file>
+    <file>
+      <path>lib/alertifyjs/</path>
+      <name>alertify.min.js</name>
     </file>
     <file>
       <path>Views/</path>

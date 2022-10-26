@@ -10,5 +10,6 @@ namespace HueCIT.Modules.BaoTangSo.Services
 {
     public class ApiBaseController 
     {
+       
     }
 }

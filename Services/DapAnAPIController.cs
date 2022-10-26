@@ -73,6 +73,24 @@ namespace HueCIT.Modules.BaoTangSo.Services
 
         }
 
+        [System.Web.Http.HttpDelete]
+        public HttpResponseMessage DapAnDelete(int ID)
+        {
+            try
+            {
+                bool check = DapAnDAL.DapAnDelete(ID);
+                if (check == true)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "Xóa đáp án thành công!", "application/json");
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Xóa đáp án lỗi!", "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Xóa đáp án lỗi:" + ex.Message, "application/json");
+            }
 
+        }
     }
 }

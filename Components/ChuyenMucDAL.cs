@@ -14,16 +14,17 @@ namespace HueCIT.MVC.ChuyenMucDAL
     public class ChuyenMucDAL
     {
         protected static IDataContext dataContext = dataContext ?? DataContext.Instance();
-        public static List<test> ChuyenMucGetAll1()
-        {
-            string sql = "SELECT * FROM test";
-            List<test> list = new GenericRepository<test>().ExecuteQuery(sql, null);
-            return list;
-        }
-
+        
         public static List<ChuyenMuc> ChuyenMucGetAll()
         {
             string sql = "SELECT * FROM ChuyenMuc order by ThuTuHienThi";
+            List<ChuyenMuc> list = new GenericRepository<ChuyenMuc>().ExecuteQuery(sql, null);
+            return list;
+        }
+
+        public static List<ChuyenMuc> ChuyenMucChaGetAll()
+        {
+            string sql = "select * from ChuyenMuc where IDChuyenMucCha is null order by ThuTuHienThi";
             List<ChuyenMuc> list = new GenericRepository<ChuyenMuc>().ExecuteQuery(sql, null);
             return list;
         }

@@ -11,6 +11,7 @@
             <div class="col-md-2">
                 <label>
                     Tên chuyên mục:
+                    <span class="red-text">*</span>
                 </label>
             </div>
             <div class="col-md-7 mid-pane">
@@ -41,6 +42,7 @@
             <div class="col-md-2">
                 <label>
                     Thứ tự hiển thị:
+                    <span class="red-text">*</span>
                 </label>
             </div>
             <div class="col-md-7 mid-pane">
@@ -82,7 +84,7 @@
             url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetByID?IDChuyenMuc=' + ID,
             success: function (data) {
                 ChuyenMuc = data;
-                //console.log(ChuyenMuc);
+                console.log(ChuyenMuc);
             },
             error: function (err) {
 
@@ -94,7 +96,7 @@
         $.ajax({
             type: 'GET',
             async: false,
-            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucGetAll',
+            url: '/api/BaoTangSo/ChuyenMucAPI/ChuyenMucChaGetAll',
             success: function (data) {
                 ListChuyenMuc = data;
                 console.log(ListChuyenMuc);
@@ -121,11 +123,13 @@
         if (ListChuyenMuc) {
             var html = `<option value="None">----------</option>`;
             ListChuyenMuc.forEach(function (item, index) {
-                if (item.TenChuyenMuc == Ten) {
-                    html += `<option value="${item.TenChuyenMuc}" selected>${item.TenChuyenMuc}</option>`;
-                }
-                else {
-                    html += `<option value="${item.TenChuyenMuc}">${item.TenChuyenMuc}</option>`;
+                if (item.ID != ChuyenMuc.ID) {
+                    if (item.TenChuyenMuc == Ten) {
+                        html += `<option value="${item.TenChuyenMuc}" selected>${item.TenChuyenMuc}</option>`;
+                    }
+                    else {
+                        html += `<option value="${item.TenChuyenMuc}">${item.TenChuyenMuc}</option>`;
+                    }
                 }
             });
             document.getElementById("ChuyenMucCha").innerHTML = html;

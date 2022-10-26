@@ -24,7 +24,10 @@ namespace HueCIT.Modules.BaoTangSo.Services
             try
             {
                 Guid id = Guid.NewGuid();
-
+                if(item.ViTriLuuTru == null)
+                {
+                    item.ViTriLuuTru = "null";
+                }
                 bool check = FileDinhKemDAL.FileDinhKemAdd(id,item.MaMauVat,item.TenTep,item.MoTa,item.ViTriLuuTru,item.LoaiFile,item.AnhDaiDien);
                 if (check == true)
                 {

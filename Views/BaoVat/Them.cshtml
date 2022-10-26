@@ -25,7 +25,9 @@
             <div class="tab-content-wrapper">
                 <div class="row">
                     <div class="col-md-2">
-                        <label for="ChuyenMuc">Chuyên mục:</label>
+                        <label for="ChuyenMuc">Chuyên mục:
+                            <span class="red-text">*</span>
+                        </label>
                     </div>
                     <div class="col-md-7 mid-pane">
                         <select class="inputnoidung" name="ChuyenMuc" id="ChuyenMuc">
@@ -36,6 +38,7 @@
                     <div class="col-md-2">
                         <label>
                             Tên mẫu vật:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -46,6 +49,7 @@
                     <div class="col-md-2">
                         <label>
                             Tên khoa học:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -66,6 +70,7 @@
                     <div class="col-md-2">
                         <label>
                             Họ:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -76,16 +81,19 @@
                     <div class="col-md-2">
                         <label>
                             Đặc điểm nhận dạng:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
-                        <input type="text" class="inputnoidung" id="DacDiemNhanDang">
+                        @*<input type="text" class="inputnoidung" id="DacDiemNhanDang">*@
+                        <textarea name="editorDacDiemNhanDang" id="editorDacDiemNhanDang" rows="15" cols="80"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
                         <label>
                             Tình trạng bảo tồn:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-10 mid-pane">
@@ -106,6 +114,7 @@
                     <div class="col-md-2">
                         <label>
                             Chất liệu:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
@@ -116,6 +125,7 @@
                     <div class="col-md-2">
                         <label>
                             Kích thước trọng lượng:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
@@ -136,6 +146,7 @@
                     <div class="col-md-2">
                         <label>
                             Phân bố:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
@@ -171,6 +182,7 @@
                     <div class="col-md-2">
                         <label>
                             Vị trí tính chất sử dụng:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
@@ -181,6 +193,7 @@
                     <div class="col-md-2">
                         <label>
                             Đơn vị trao tặng:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
@@ -194,7 +207,7 @@
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
-                        <input type="file" id="file-avatar" accept="image/*"/>
+                        <input type="file" id="file-avatar" accept="image/*" />
                     </div>
                 </div>
                 <div class="row">
@@ -206,12 +219,18 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
+                    </div>
+                    <div class="col-md-7 mid-pane" id="showAnhDaiDien">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
                         <label>
                             File thuyết minh:
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
-                        <input type="file" id="file-thuyetminh" accept="audio/*"/>
+                        <input type="file" id="file-thuyetminh" accept="audio/*" />
                     </div>
                 </div>
                 <div class="row">
@@ -223,8 +242,15 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
+                    </div>
+                    <div class="col-md-7 mid-pane" id="showFileThuyetMinh">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
                         <label>
                             Nội dung thuyết minh:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-10 last-pane">
@@ -250,6 +276,12 @@
                     </div>
                     <div class="col-md-7 mid-pane">
                         <span>.bmp|.gif|.jpg|.jpeg|.png|.pspimage</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-7 mid-pane" id="showHinhAnhTaiVe">
                     </div>
                 </div>
                 <input type="button" onclick="LuuHinhAnhTaiVe()" value="Lưu" style="margin-left:50px;" />
@@ -285,6 +317,12 @@
                         <span>.bmp|.gif|.jpg|.jpeg|.png|.pspimage</span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-7 mid-pane" id="showHinhAnhTieuBan">
+                    </div>
+                </div>
                 <input type="button" onclick="LuuHinhAnhTieuBan()" value="Lưu" style="margin-left:50px;" />
                 <div class="list-table">
                     <span>Danh sách hình ảnh tiêu bản</span>
@@ -308,11 +346,21 @@
                 <div class="row">
                     <div class="col-md-2">
                         <label>
+                            URL:
+                        </label>
+                    </div>
+                    <div class="col-md-7 mid-pane">
+                        <input type="text" id="link-youtube" style="width:800px;" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>
                             Video:
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
-                        <input type="file" id="file-video" accept="video/*"/>
+                        <input type="file" id="file-video" accept="video/*" />
                     </div>
                 </div>
                 <div class="row">
@@ -320,6 +368,12 @@
                     </div>
                     <div class="col-md-7 mid-pane">
                         <span>.mp4|.m4v|.webm|.ogv</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-7 mid-pane" id="showVideo">
                     </div>
                 </div>
                 <input type="button" onclick="LuuVideo()" value="Lưu" style="margin-left:50px;" />
@@ -363,17 +417,18 @@
                     <div class="col-md-2">
                         <label>
                             File Sách:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
-                        <input type="file" id="file-sach" accept=".doc,.docx"/>
+                        <input type="file" id="file-sach" accept=".doc,.docx,.pdf"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-7 mid-pane">
-                        <span>.doc|.docx</span>
+                        <span>.doc|.docx|.pdf</span>
                     </div>
                 </div>
 
@@ -381,6 +436,7 @@
                     <div class="col-md-2">
                         <label>
                             Ảnh đại diện:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -398,6 +454,7 @@
                     <div class="col-md-2">
                         <label>
                             Tiêu đề:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -431,6 +488,7 @@
                     <div class="col-md-2">
                         <label>
                             Bài nghiên cứu:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -448,6 +506,7 @@
                     <div class="col-md-2">
                         <label>
                             Tiêu đề:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -493,7 +552,8 @@
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
-                        <input type="file" id="file-tailieu" accept=".doc,.docx"/>
+                        <input type="file" id="file-tailieu" accept=".doc,.docx" />
+                        <a class="blue-text" style="cursor: pointer; visibility: hidden; " id="HuyFileTaiLieu" onclick="HuyFileTaiLieu()" >x</a>
                     </div>
                 </div>
                 <div class="row">
@@ -507,6 +567,7 @@
                     <div class="col-md-2">
                         <label>
                             Tiêu đề:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
@@ -517,10 +578,11 @@
                     <div class="col-md-2">
                         <label>
                             Link xem tài liệu:
+                            <span class="red-text">*</span>
                         </label>
                     </div>
                     <div class="col-md-7 mid-pane">
-                        <input type="text" class="inputnoidung" id="linkxem-tailieu" style="width:700px;"/>
+                        <input type="text" class="inputnoidung" id="linkxem-tailieu" style="width:700px;" />
                     </div>
                 </div>
                 <input type="button" value="Lưu" style="margin-left:50px;" onclick="LuuTaiLieu()" />
@@ -615,6 +677,11 @@
             language: 'vi',
         });
 
+        CKEDITOR.replace('editorDacDiemNhanDang', {
+            height: 500,
+            startupMode: 'source',
+            language: 'vi',
+        });
     });
     var IDMauVat = "";
     function LoadIDMauVat() {
@@ -672,7 +739,7 @@
     }
     LoadDuLieuChuyenMuc();
 
-    var fileAnhPhanBo = document.querySelector("#file-phanbo");
+    @*var fileAnhPhanBo = document.querySelector("#file-phanbo");
     fileAnhPhanBo.addEventListener("change", (event) => {
         const { files } = event.target;
         console.log(files);
@@ -682,18 +749,187 @@
 
         //HinhAnhPhanBo = files[0].name;
         //console.log(HinhAnhPhanBo);
+    })*@
+    //load mô tả anh phân bố
+    var fileAnhPhanBo = document.querySelector("#file-phanbo");
+    fileAnhPhanBo.addEventListener("change", (event) => {
+        const { files } = event.target;
+
+        if (files.length > 0) {
+            let formData = new FormData();
+            formData.append('file', files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/api/BaoTangSo/MauVatAPI/FileUploadAnhTaiVe?TenMauVat=' + document.getElementById("TenMauVat").value,
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    var url = window.location.origin + "/Portals/0/BaoTangSo/images/" + files[0].name;
+                    var html = `<img style="width:150px;" src="${url}"/>`;
+                    document.getElementById("showAnhPhanBo").innerHTML = html;
+                },
+                error: function (err) {
+                    alert("Tải hình ảnh không thành công!");
+                }
+            });
+        }
+
+    })
+    //load mô tả ảnh đại diện
+    var fileAnhDaiDien = document.querySelector("#file-avatar");
+    fileAnhDaiDien.addEventListener("change", (event) => {
+        const { files } = event.target;
+
+        if (files.length > 0) {
+            let formData = new FormData();
+            formData.append('file', files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/api/BaoTangSo/MauVatAPI/FileUploadAnhTaiVe?TenMauVat=' + document.getElementById("TenMauVat").value,
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    var url = window.location.origin + "/Portals/0/BaoTangSo/images/" + files[0].name;
+                    var html = `<img style="width:150px;" src="${url}"/>`;
+                    document.getElementById("showAnhDaiDien").innerHTML = html;
+                },
+                error: function (err) {
+                    alert("Tải hình ảnh không thành công!");
+                }
+            });
+        }
+
+    })
+    //load mô tả file thuyết minh
+    var fileThuyetMinh = document.querySelector("#file-thuyetminh");
+    fileThuyetMinh.addEventListener("change", (event) => {
+        const { files } = event.target;
+
+        if (files.length > 0) {
+            let formData = new FormData();
+            formData.append('file', files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/api/BaoTangSo/MauVatAPI/FileUploadThuyetMinh?TenMauVat=' + document.getElementById("TenMauVat").value,
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    var url = window.location.origin + "/Portals/0/BaoTangSo/audios/" + files[0].name;
+                    var html = `<audio controls>
+  <source src="${url}" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>`;
+                    document.getElementById("showFileThuyetMinh").innerHTML = html;
+                },
+                error: function (err) {
+                    alert("Dung lượng file lớn. Tải file thuyết minh không thành công.");
+                    document.getElementById("file-thuyetminh").value = "";
+                }
+            });
+        }
+
+    })
+
+    //load mô tả ảnh tải về
+    var fileAnhTaiVe = document.querySelector("#file-taive");
+    fileAnhTaiVe.addEventListener("change", (event) => {
+        const { files } = event.target;
+        
+            if (files.length > 0) {
+                let formData = new FormData();
+                formData.append('file', files[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/BaoTangSo/MauVatAPI/FileUploadAnhTaiVe?TenMauVat=' + document.getElementById("TenMauVat").value,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        var url = window.location.origin + "/Portals/0/BaoTangSo/images/" + files[0].name;
+                        var html = `<img style="width:150px;" src="${url}"/>`;
+                        document.getElementById("showHinhAnhTaiVe").innerHTML = html;
+                    },
+                    error: function (err) {
+                        alert("Tải hình ảnh không thành công!");
+                    }
+                });
+            }
+        
+    })
+
+    var fileAnhTieuBan = document.querySelector("#file-tieuban");
+    fileAnhTieuBan.addEventListener("change", (event) => {
+        const { files } = event.target;
+
+        if (files.length > 0) {
+            let formData = new FormData();
+            formData.append('file', files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/api/BaoTangSo/MauVatAPI/FileUploadAnhTieuBan?TenMauVat=' + document.getElementById("TenMauVat").value,
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    var url = window.location.origin + "/Portals/0/BaoTangSo/images/" + files[0].name;
+                    var html = `<img style="width:150px;" src="${url}"/>`;
+                    document.getElementById("showHinhAnhTieuBan").innerHTML = html;
+                },
+                error: function (err) {
+                    alert("Tải hình ảnh không thành công!");
+                }
+            });
+        }
+
+    })
+
+    var fileVideo = document.querySelector("#file-video");
+    fileVideo.addEventListener("change", (event) => {
+        const { files } = event.target;
+
+        if (files.length > 0) {
+            let formData = new FormData();
+            formData.append('file', files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/api/BaoTangSo/MauVatAPI/FileUploadVideo?TenMauVat=' + document.getElementById("TenMauVat").value,
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (response) {
+                    var url = window.location.origin + "/Portals/0/BaoTangSo/videos/" + files[0].name;
+                    html = `<video width="150px"><source src="${url}"></video>`;
+                    document.getElementById("showVideo").innerHTML = html;
+                },
+                error: function (err) {
+                    alert("Tải file video không thành công!");
+                }
+            });
+        }
+
     })
 
     var fileSach = document.querySelector("#file-sach");
     fileSach.addEventListener("change", (event) => {
         const { files } = event.target;
         console.log(files);
-        
+    })
 
+    var ListFileTaiLieu = [];
+    var fileTaiLieu = document.querySelector("#file-tailieu");
+    fileTaiLieu.addEventListener("change", (event) => {
+        const { files } = event.target;
+        ListFileTaiLieu.push(files);
+        console.log(ListFileTaiLieu);
+        document.getElementById("HuyFileTaiLieu").style.visibility = "visible";
     })
     
     function TaoMauVat() {
         var timkiem = ListChuyenMuc.find(c => c.TenChuyenMuc == document.getElementById("ChuyenMuc").value);
+        var DacDiemNhanDang = CKEDITOR.instances.editorDacDiemNhanDang.getData();
         if (!document.getElementById("TenMauVat").value) {
             alert("Vui lòng nhập tên mẫu vật");
         }
@@ -706,7 +942,7 @@
         else if (!document.getElementById("Ho").value) {
             alert("Vui lòng nhập họ của mẫu vật");
         }
-        else if (!document.getElementById("DacDiemNhanDang").value) {
+        else if (!DacDiemNhanDang) {
             alert("Vui lòng nhập đặc điểm nhận dạng");
         }
         else if (!document.getElementById("TinhTrangBaoTon").value) {
@@ -743,7 +979,7 @@
                 TenKhoaHoc: document.getElementById("TenKhoaHoc").value,
                 TenGoiKhac: document.getElementById("TenGoiKhac").value ? document.getElementById("TenGoiKhac").value : null,
                 Ho: document.getElementById("Ho").value ? document.getElementById("Ho").value : null,
-                DacDiemNhanDang: document.getElementById("DacDiemNhanDang").value,
+                DacDiemNhanDang: CKEDITOR.instances.editorDacDiemNhanDang.getData(),
                 TinhTrangBaoTon: document.getElementById("TinhTrangBaoTon").value,
                 DiaDiemSuuTam: document.getElementById("DiaDiemSuuTam").value,
                 ChatLieu: document.getElementById("ChatLieu").value,
@@ -858,6 +1094,7 @@
                         url: `/api/BaoTangSo/MauVatAPI/MauVatUpdate?ID=${IDMauVat}&Sach=${FileSach}&BaiNghienCuu=${FileBaiNghienCuu}&TaiLieu=${FileTaiLieu}`,
                         success: function (dulieu) {
                             window.location = window.location.origin + "/CMS/Quản-trị-bảo-vật";
+                            alertify.success('Tạo mới dữ liệu thành công.');
                         },
                         error: function (err) {
                             alert("Thêm mau vat thất bại!");
@@ -875,102 +1112,126 @@
 
 
     function LuuHinhAnhTaiVe() {
-        var file = $('#file-taive').get(0);
-        var files = file.files;
-        if (files.length > 0) {
-            let formData = new FormData();
-            formData.append('file', files[0]);
-            if (ListHinhAnhTaiVe) {
-                ListHinhAnhTaiVe += ",";
-                ListHinhAnhTaiVe += files[0].name;
+            var file = $('#file-taive').get(0);
+            var files = file.files;
+            if (files.length > 0) {
+                let formData = new FormData();
+                formData.append('file', files[0]);
+                if (ListHinhAnhTaiVe) {
+                    ListHinhAnhTaiVe += ",";
+                    ListHinhAnhTaiVe += files[0].name;
+                }
+                else {
+                    ListHinhAnhTaiVe += files[0].name;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/BaoTangSo/MauVatAPI/FileUploadAnhTaiVe?TenMauVat=' + document.getElementById("TenMauVat").value,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        LoadDuLieu();
+                        document.getElementById("file-taive").value = "";
+                        document.getElementById("showHinhAnhTaiVe").innerHTML = "";
+                    },
+                    error: function (err) {
+                        alert("Thêm hình ảnh không thành công!");
+                    }
+                });
             }
             else {
-                ListHinhAnhTaiVe += files[0].name;
+                alert("Vui lòng chọn file");
             }
-            $.ajax({
-                type: 'POST',
-                url: '/api/BaoTangSo/MauVatAPI/FileUpload',
-                processData: false,
-                contentType: false,
-                data: formData,
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (err) {
-                    LoadDuLieu();
-                }
-            });
-        }
-        else {
-            alert("Vui lòng chọn file");
-        }
     }
 
     function LuuHinhAnhTieuBan() {
-        var file = $('#file-tieuban').get(0);
-        var files = file.files;
-        if (files.length > 0) {
-            let formData = new FormData();
-            formData.append('file', files[0]);
-            if (ListHinhAnhTieuBan) {
-                ListHinhAnhTieuBan += ",";
-                ListHinhAnhTieuBan += files[0].name;
+            var file = $('#file-tieuban').get(0);
+            var files = file.files;
+            if (files.length > 0) {
+                let formData = new FormData();
+                formData.append('file', files[0]);
+                if (ListHinhAnhTieuBan) {
+                    ListHinhAnhTieuBan += ",";
+                    ListHinhAnhTieuBan += files[0].name;
+                }
+                else {
+                    ListHinhAnhTieuBan += files[0].name;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/BaoTangSo/MauVatAPI/FileUploadAnhTieuBan?TenMauVat=' + document.getElementById("TenMauVat").value,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (response) {
+                        LoadDuLieu();
+                        document.getElementById("file-tieuban").value = "";
+                        document.getElementById("showHinhAnhTieuBan").innerHTML = "";
+                    },
+                    error: function (err) {
+                        alert("Thêm hình ảnh không thành công");
+                    }
+                });
             }
             else {
-                ListHinhAnhTieuBan += files[0].name;
+                alert("Vui lòng chọn file");
             }
-            $.ajax({
-                type: 'POST',
-                url: '/api/BaoTangSo/MauVatAPI/FileUpload',
-                processData: false,
-                contentType: false,
-                data: formData,
-                success: function (response) {
-                    console.log("Thêm ảnh thành công");
-                },
-                error: function (err) {
-                    console.log(err);
-                    LoadDuLieu();
-                }
-            });
-        }
-        else {
-            alert("Vui lòng chọn file");
-        }
     }
 
     function LuuVideo() {
         var file = $('#file-video').get(0);
         var files = file.files;
-        console.log(files);
-        if (files.length > 0) {
-            let formData = new FormData();
-            if (ListVideo) {
-                ListVideo += ",";
-                ListVideo += files[0].name;
-            }
-            else {
-                ListVideo += files[0].name;
-            }
-            formData.append('file', files[0]);
-            $.ajax({
-                type: 'POST',
-                url: '/api/BaoTangSo/MauVatAPI/FileUploadVideo',
-                processData: false,
-                contentType: false,
-                data: formData,
-                success: function (response) {
-                    console.log("Thêm video thành công");
-                },
-                error: function (err) {
-                    console.log(err);
-                    LoadDuLieu();
-                }
-            });
+        if (!document.getElementById("link-youtube").value && files.length == 0) {
+            alert("Vui lòng nhập link youtube hoặc chọn file video");
         }
         else {
-            alert("Vui lòng chọn file");
+            if (document.getElementById("link-youtube").value) {
+                var link = document.getElementById("link-youtube").value;
+                if (ListVideo) {
+                    ListVideo += ",";
+                    ListVideo += link;
+                }
+                else {
+                    ListVideo = link;
+                }
+                console.log(ListVideo);
+                LoadDuLieu();
+                document.getElementById("link-youtube").value = "";
+            }
+
+            if (files.length > 0) {
+                let formData = new FormData();
+                if (ListVideo) {
+                    ListVideo += ",";
+                    ListVideo += files[0].name;
+                }
+                else {
+                    ListVideo += files[0].name;
+                }
+                formData.append('file', files[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/BaoTangSo/MauVatAPI/FileUploadVideo?TenMauVat=' + document.getElementById("TenMauVat").value,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (response) {
+                        alertify.success("Thêm video thành công");
+                        LoadDuLieu();
+                        document.getElementById("file-video").value = "";
+                        document.getElementById("showVideo").innerHTML = "";
+                    },
+                    error: function (err) {
+                        alert("Thêm file video không thành công!");
+                    }
+                });
+            }
+            @*else {
+                alert("Vui lòng chọn file");
+            }*@
         }
+        
     }
 
     function LuuAnhPhanBo() {
@@ -982,12 +1243,11 @@
             HinhAnhPhanBo = files[0].name;
             $.ajax({
                 type: 'POST',
-                url: '/api/BaoTangSo/MauVatAPI/FileUpload',
+                url: '/api/BaoTangSo/MauVatAPI/FileUpload?TenMauVat=' + document.getElementById("TenMauVat").value,
                 processData: false,
                 contentType: false,
                 data: formData,
                 success: function (data) {
-                    console.log(data);
                 },
                 error: function (err) {
                 }
@@ -1007,12 +1267,11 @@
             FileThuyetMinh = files[0].name;
             $.ajax({
                 type: 'POST',
-                url: '/api/BaoTangSo/MauVatAPI/FileUploadThuyetMinh',
+                url: '/api/BaoTangSo/MauVatAPI/FileUploadThuyetMinh?TenMauVat=' + document.getElementById("TenMauVat").value,
                 processData: false,
                 contentType: false,
                 data: formData,
                 success: function (data) {
-                    console.log(data);
                 },
                 error: function (err) {
                 }
@@ -1032,12 +1291,11 @@
             HinhAnhDaiDien = files[0].name;
             $.ajax({
                 type: 'POST',
-                url: '/api/BaoTangSo/MauVatAPI/FileUpload',
+                url: '/api/BaoTangSo/MauVatAPI/FileUpload?TenMauVat=' + document.getElementById("TenMauVat").value,
                 processData: false,
                 contentType: false,
                 data: formData,
                 success: function (data) {
-                    console.log(data);
                 },
                 error: function (err) {
                 }
@@ -1049,139 +1307,160 @@
     }
 
     function LuuSach() {
-        var file = $('#file-sach').get(0);
-        var files = file.files;
-        console.log(files);
+            var file = $('#file-sach').get(0);
+            var files = file.files;
+            console.log(files);
 
-        var fileAvatar = $('#file-sach-anhdaidien').get(0);
-        var filesAvatar = fileAvatar.files;
+            var fileAvatar = $('#file-sach-anhdaidien').get(0);
+            var filesAvatar = fileAvatar.files;
 
-        console.log(filesAvatar);
+            console.log(filesAvatar);
 
-        if (files.length == 0) {
-            alert("Vui lòng chọn file đính kèm sách!");
-        }
-        else if (filesAvatar.length == 0) {
-            alert("Vui lòng chọn ảnh đại diện!");
-        }
-        else if (!document.getElementById("tieude-sach").value) {
-            alert("Vui lòng nhập tiêu đề");
-        }
-        else {
-            let formData = new FormData();
-            formData.append('file', files[0]);
-            formData.append('fileAvatar', filesAvatar[0]);
-            var obj = {
-                MaMauVat: IDMauVat,
-                ViTriLuuTru: files[0].name,
-                AnhDaiDien: filesAvatar[0].name,
-                TenTep: document.getElementById("tieude-sach").value,
-                LoaiFile : 0
+            if (files.length == 0) {
+                alert("Vui lòng chọn file đính kèm sách!");
             }
-            ListSach.push(obj);
-            $.ajax({
-                type: 'POST',
-                url: '/api/BaoTangSo/MauVatAPI/FileUploadSach',
-                processData: false,
-                contentType: false,
-                data: formData,
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (err) {
-                    console.log(ListSach);
-                    LoadDuLieu();
+            else if (filesAvatar.length == 0) {
+                alert("Vui lòng chọn ảnh đại diện!");
+            }
+            else if (!document.getElementById("tieude-sach").value) {
+                alert("Vui lòng nhập tiêu đề");
+            }
+            else {
+                let formData = new FormData();
+                formData.append('file', files[0]);
+                formData.append('fileAvatar', filesAvatar[0]);
+                var obj = {
+                    MaMauVat: IDMauVat,
+                    ViTriLuuTru: files[0].name,
+                    AnhDaiDien: filesAvatar[0].name,
+                    TenTep: document.getElementById("tieude-sach").value,
+                    LoaiFile: 0
                 }
-            });
-        }
-        
+                ListSach.push(obj);
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/BaoTangSo/MauVatAPI/FileUploadSach?TenMauVat=' + document.getElementById("TenMauVat").value,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        alertify.success("Thêm sách thành công");
+                        LoadDuLieu();
+                        document.getElementById("file-sach").value = "";
+                        document.getElementById("file-sach-anhdaidien").value = "";
+                        document.getElementById("tieude-sach").value = "";
+                    },
+                    error: function (err) {
+                        alert("Thêm file sách không thành công");
+                    }
+                });
+            }
     }
 
     function LuuBaiNghienCuu() {
-        let giaTri = CKEDITOR.instances.editorNoiDung.getData();
-        var tieude = document.getElementById("tieude-bainghiencuu").value;
-        if (!tieude) {
-            alert("Tiêu đề không được để trống!");
-        }
-        else if (!giaTri) {
-            alert("Nội dung không được để trống!")
-        } else {
-            console.log(giaTri);
-            var file = $('#file-bainghiencuu').get(0);
-            var files = file.files;
-            console.log(files);
-            if (files.length != 0) {
-                let formData = new FormData();
-                formData.append('file', files[0]);
-                var obj = {
-                    MaMauVat: IDMauVat,
-                    ViTriLuuTru: files[0].name,
-                    TenTep: document.getElementById("tieude-bainghiencuu").value,
-                    MoTa: giaTri,
-                    LoaiFile: 1
-                }
-                ListBaiNghienCuu.push(obj);
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/BaoTangSo/MauVatAPI/FileUploadBaiNghienCuu',
-                    processData: false,
-                    contentType: false,
-                    data: formData,
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (err) {
-                        console.log(ListBaiNghienCuu);
-                        LoadDuLieu();
-                    }
-                });
+            let giaTri = CKEDITOR.instances.editorNoiDung.getData();
+            var tieude = document.getElementById("tieude-bainghiencuu").value;
+            if (!tieude) {
+                alert("Tiêu đề không được để trống!");
             }
-        }
+            else if (!giaTri) {
+                alert("Nội dung không được để trống!")
+            } else {
+                console.log(giaTri);
+                var file = $('#file-bainghiencuu').get(0);
+                var files = file.files;
+                console.log(files);
+                if (files.length != 0) {
+                    let formData = new FormData();
+                    formData.append('file', files[0]);
+                    var obj = {
+                        MaMauVat: IDMauVat,
+                        ViTriLuuTru: files[0].name,
+                        TenTep: document.getElementById("tieude-bainghiencuu").value,
+                        MoTa: giaTri,
+                        LoaiFile: 1
+                    }
+                    ListBaiNghienCuu.push(obj);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/BaoTangSo/MauVatAPI/FileUploadBaiNghienCuu?TenMauVat=' + document.getElementById("TenMauVat").value,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            alertify.success("Thêm bài nghiên cứu thành công");
+                            LoadDuLieu();
+                            document.getElementById("tieude-bainghiencuu").value = "";
+                            document.getElementById("file-bainghiencuu").value = "";
+                            CKEDITOR.instances['editorNoiDung'].setData("");
+                        },
+                        error: function (err) {
+                            alert("Thêm file bài nghiên cứu không thành công!");
+                        }
+                    });
+                }
+            }
+        
     }
 
     function LuuTaiLieu() {
-        var tieude = document.getElementById("tieude-tailieu").value;
-        var link = document.getElementById("linkxem-tailieu").value;
-        if (!tieude) {
-            alert("Tiêu đề không được để trống");
-        }
-        else if (!link) {
-            alert("Link xem tài liệu không được để trống");
-        }
-        else {
-            var file = $('#file-tailieu').get(0);
-            var files = file.files;
-            console.log(files);
-            if (files.length != 0) {
-                let formData = new FormData();
-                formData.append('file', files[0]);
-                var obj = {
-                    MaMauVat: IDMauVat,
-                    ViTriLuuTru: files[0].name,
-                    TenTep: document.getElementById("tieude-tailieu").value,
-                    MoTa: document.getElementById("linkxem-tailieu").value,
-                    LoaiFile: 2
-                }
-                ListTaiLieu.push(obj);
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/BaoTangSo/MauVatAPI/FileUploadTaiLieu',
-                    processData: false,
-                    contentType: false,
-                    data: formData,
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (err) {
-                        console.log(ListTaiLieu);
-                        LoadDuLieu();
-                    }
-                });
+            var tieude = document.getElementById("tieude-tailieu").value;
+            var link = document.getElementById("linkxem-tailieu").value;
+            if (!tieude) {
+                alert("Tiêu đề không được để trống");
+            }
+            else if (!link) {
+                alert("Link xem tài liệu không được để trống");
             }
             else {
-                alert("Tài liệu không được để trống");
+                var file = $('#file-tailieu').get(0);
+                var files = file.files;
+                if (files.length != 0) {
+                        let formData = new FormData();
+                        formData.append('file', files[0]);
+                        var obj = {
+                            MaMauVat: IDMauVat,
+                            ViTriLuuTru: files[0].name,
+                            TenTep: document.getElementById("tieude-tailieu").value,
+                            MoTa: document.getElementById("linkxem-tailieu").value,
+                            LoaiFile: 2
+                        }
+                        ListTaiLieu.push(obj);
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/BaoTangSo/MauVatAPI/FileUploadTaiLieu?TenMauVat=' + document.getElementById("TenMauVat").value,
+                            processData: false,
+                            contentType: false,
+                            data: formData,
+                            success: function (data) {
+                                alertify.success("Thêm tài liệu thành công");
+                                LoadDuLieu();
+                                document.getElementById("file-tailieu").value = "";
+                                document.getElementById("tieude-tailieu").value = "";
+                                document.getElementById("linkxem-tailieu").value = "";
+                            },
+                            error: function (err) {
+                                alert("Thêm file tài liệu không thành công!");
+                            }
+                        });
+                }
+                else {
+                    var obj = {
+                        MaMauVat: IDMauVat,
+                        ViTriLuuTru: null,
+                        TenTep: document.getElementById("tieude-tailieu").value,
+                        MoTa: document.getElementById("linkxem-tailieu").value,
+                        LoaiFile: 2
+                    }
+                    ListTaiLieu.push(obj);
+                    alertify.success("Thêm tài liệu thành công");
+                    LoadDuLieu();
+                    document.getElementById("file-tailieu").value = "";
+                    document.getElementById("tieude-tailieu").value = "";
+                    document.getElementById("linkxem-tailieu").value = "";
+                }
             }
-        }
+        
     }
     function LoadDuLieu() {
         if (ListHinhAnhTaiVe) {
@@ -1193,7 +1472,7 @@
                             </tr>`;
             console.log(list);
             list.forEach(function (item, index) {
-                var url = window.location.origin + "/Portals/images/" + item;
+                var url = window.location.origin + "/Portals/0/BaoTangSo/images/" + item;
                 html += `<tr>
                                 <td>${index + 1}</td>
                                 <td><img width="100px" src="${url}"/></td>
@@ -1223,7 +1502,7 @@
                             </tr>`;
             console.log(list);
             list.forEach(function (item, index) {
-                var url = window.location.origin + "/Portals/images/" + item;
+                var url = window.location.origin + "/Portals/0/BaoTangSo/images/" + item;
                 html += `<tr>
                                 <td>${index + 1}</td>
                                 <td><img width="100px" src="${url}"/></td>
@@ -1253,12 +1532,23 @@
                             </tr>`;
             console.log(list);
             list.forEach(function (item, index) {
-                var url = window.location.origin + "/Portals/videos/" + item;
-                html += `<tr>
+                if (item.includes("https")){
+                    html += `<tr>
+                                <td>${index + 1}</td>
+                                <td><iframe width="200px" height="200px" src=${item}>
+</iframe></td>
+                                <td><input type="button" value="Xóa" onclick="DeleteVideo(${index})"/></td>
+                            </tr>`
+                }
+                else {
+                    var url = window.location.origin + "/Portals/0/BaoTangSo/videos/" + item;
+                    html += `<tr>
                                 <td>${index + 1}</td>
                                 <td><video width="100"><source src="${url}"></video></td>
                                 <td><input type="button" value="Xóa" onclick="DeleteVideo(${index})"/></td>
                             </tr>`
+                }
+                
             });
             document.getElementById("tbl-video").innerHTML = html;
         }
@@ -1283,7 +1573,7 @@
                                 <th>Xóa</th>
                             </tr>`;
             ListSach.forEach(function (item, index) {
-                var url = window.location.origin + "/Portals/Sach/" + item.AnhDaiDien;
+                var url = window.location.origin + "/Portals/0/BaoTangSo/files/" + item.AnhDaiDien;
                 html += `<tr>
                                 <td>${index + 1}</td>
                                 <td><img width="100px" src="${url}"/></td>
@@ -1451,6 +1741,11 @@
     function DeleteTaiLieu(index) {
         ListTaiLieu.splice(index, 1);
         LoadDuLieu();
+    }
+
+    function HuyFileTaiLieu() {
+        document.getElementById("file-tailieu").value = "";
+        document.getElementById("HuyFileTaiLieu").style.visibility = "hidden";
     }
 </script>
 

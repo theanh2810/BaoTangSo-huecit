@@ -44,6 +44,13 @@ namespace HueCIT.MVC.ChuyenMucDAL
             }
         }
 
+        public static List<CauHoi> CauHoiGetAll()
+        {
+            string sql = "select * from CauHoi";
+            List<CauHoi> list = new GenericRepository<CauHoi>().ExecuteQuery(sql, null);
+            return list;
+        }
+
         public static List<CauHoi> CauHoiGetByMauVat(string IDMauVat)
         {
             string sql = "SELECT * FROM CauHoi where MaMauVat = '" + IDMauVat + "'";
@@ -69,6 +76,23 @@ namespace HueCIT.MVC.ChuyenMucDAL
                    ThuTuHienThi,
                 };
                 dataContext.Execute(System.Data.CommandType.StoredProcedure, "sp_CauHoiEdit", param.ToArray().ToList());
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static bool CauHoiDelete(int ID)
+        {
+            try
+            {
+                var param = new List<object> {
+                   ID,
+                };
+                dataContext.Execute(System.Data.CommandType.StoredProcedure, "sp_CauHoiDelete", param.ToArray().ToList());
                 return true;
 
             }

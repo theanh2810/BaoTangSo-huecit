@@ -69,6 +69,23 @@ namespace HueCIT.MVC.ChuyenMucDAL
                 return false;
             }
         }
+
+        public static bool DapAnDelete(int ID)
+        {
+            try
+            {
+                var param = new List<object> {
+                   ID,
+                };
+                dataContext.Execute(System.Data.CommandType.StoredProcedure, "sp_DapAnDelete", param.ToArray().ToList());
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 
 }
